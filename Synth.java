@@ -14,15 +14,12 @@ public class Synth
 		
 		sdl.open(format);
 		sdl.start();
-		
-		for (int i = 0; i < length * SAMPLE_SIZE; i++)
+		for (int i = 0; i < length * 45; i++) // 45 is an approximation of 44100 / 1000
 		{
 			double angle = i / ((double) SAMPLE_RATE / hz) * 2.0 * Math.PI;
 			buffer[0] = (byte) (Math.sin(angle) * 127.0 * volume);
 			sdl.write(buffer, 0, 1);
-			System.out.println(buffer[0]);
 		}
-		
 		sdl.drain();
 		sdl.stop();
 		sdl.close();
